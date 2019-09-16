@@ -48,7 +48,7 @@ public class Weapon : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		anim = Hands.GetComponent<Animator>();
+		// anim = Hands.GetComponent<Animator>();
 		OriginalPos = Hands.transform.localPosition;
 
 		// Player = GameObject.Find("FirstPersonCharacter");
@@ -60,40 +60,41 @@ public class Weapon : MonoBehaviour {
 	void Update () {
 		if(Input.GetMouseButtonDown(0))
 		{
-			anim.CrossFadeInFixedTime("Hands|M4A1_Fire",0.01f);
+			// anim.CrossFadeInFixedTime("Hands|M4A1_Fire",0.01f);
 			// GetComponent<Animator>().CrossFadeInFixedTime("Hands|M4A1_Fire", 0.01f);
 			Player.GetComponent<Pure_FPP_Camera>().Recoil();
-			Hands.GetComponent<AudioSource>().PlayOneShot(Calibre.Gunshot,1f);
-			MuzzleFlash.Play();
+			// Hands.GetComponent<AudioSource>().PlayOneShot(Calibre.Gunshot,1f);
+			// MuzzleFlash.Play();
 			Shoot();
 
 		}else if (Input.GetKeyDown(KeyCode.R)){
-			anim.CrossFadeInFixedTime("Hands|M4A1_Reload",0.01f);
+			// anim.CrossFadeInFixedTime("Hands|M4A1_Reload",0.01f);
 			StartCoroutine(Reloading());
 
-		}else if(Input.GetKeyDown(KeyCode.G)){
-
-			StartCoroutine(Grenade());
 		}
+		// else if(Input.GetKeyDown(KeyCode.G)){
+
+		// 	StartCoroutine(Grenade());
+		// }
 
 		
 
-			AimDownSights();
+			// AimDownSights();
 		
 
 	}
 
 
-	 private IEnumerator Grenade(){
-		 anim.CrossFadeInFixedTime("Hands|M4A1 Take Out",0.01f);
-		 yield return new WaitForSeconds(0.5f);
-	 }
+	//  private IEnumerator Grenade(){
+	// 	 anim.CrossFadeInFixedTime("Hands|M4A1 Take Out",0.01f);
+	// 	 yield return new WaitForSeconds(0.5f);
+	//  }
 
 	 private IEnumerator Reloading(){
 		 yield return new WaitForSeconds(0.5f);
-		Hands.GetComponent<AudioSource>().PlayOneShot(ReloadSounds[0],0.5f);
+		// Hands.GetComponent<AudioSource>().PlayOneShot(ReloadSounds[0],0.5f);
 		 yield return new WaitForSeconds(1.72f);
-		Hands.GetComponent<AudioSource>().PlayOneShot(ReloadSounds[1],0.5f);
+		// Hands.GetComponent<AudioSource>().PlayOneShot(ReloadSounds[1],0.5f);
 	 }
 
 

@@ -22,6 +22,10 @@ public class WeaponController : MonoBehaviour
     public float adsSpeed;
 
 
+    [Header("Weapon Settings")]
+    public GameObject BarrelPos;
+    public Magazine loadedMag;
+
     void Start()
     {
         currentWeapon = this.gameObject;

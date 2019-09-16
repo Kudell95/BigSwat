@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
     IEnumerator Start()
     {
         trail = GetComponent<TrailRenderer>();
-        Vector3 vel = transform.up * Bullet.Velocity; // calculate velocity vector
+        Vector3 vel = transform.forward * Bullet.Velocity; // calculate velocity vector
         Vector3 originalVel = vel;
         Vector3 pos = transform.position;
         CurrentVelocity = vel.magnitude;
@@ -57,9 +57,14 @@ public class Projectile : MonoBehaviour
                 {
                     case "Penetrable":
                         // object is penetrable
-                        Instantiate(hit.transform.gameObject.GetComponent<Wall>().particleEffects, hit.point, Quaternion.LookRotation(hit.normal));
+                        // Instantiate(hit.transform.gameObject.GetComponent<Wall>().particleEffects, hit.point, Quaternion.LookRotation(hit.normal));
                         gravity = gravity * hit.transform.gameObject.GetComponent<Wall>().wallVelocityChange;
                         vel = vel / 1.2f;
+                        Debug.Log(vel.magnitude);
+                        if(vel.magnitude < 100)
+                        {
+                            Destroy(gameObject);
+                        }
                         CurrentVelocity = vel.magnitude;
                         hasBeenHit = true;
                         print("Penetrating " + hit.transform.name);
@@ -82,7 +87,7 @@ public class Projectile : MonoBehaviour
                         }
                         else
                         {
-                            Instantiate(ParticleEffects[0], hit.point, Quaternion.LookRotation(hit.normal));
+                            // Instantiate(ParticleEffects[0], hit.point, Quaternion.LookRotation(hit.normal));
                             //hitTarget
                             Destroy(gameObject);
                         }
