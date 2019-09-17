@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Projectile : MonoBehaviour
 {
@@ -24,7 +25,13 @@ public class Projectile : MonoBehaviour
     public float CurrentVelocity;
 
     public GameObject[] ParticleEffects;
+
+    public float rand;
     
+    void Awake()
+    {
+        rand = Random.Range(1f, 3f);
+    }
 
 
     IEnumerator Start()
@@ -75,8 +82,9 @@ public class Projectile : MonoBehaviour
                         break;
                     default:
                         // other objects - bounce off:
-
-                        if (!hasBeenHit && Vector3.Angle(vel, -hit.normal) > MaxRicochetAngle)
+                        
+                        Debug.Log(rand);
+                        if (!hasBeenHit && Vector3.Angle(vel, -hit.normal) > MaxRicochetAngle && rand > 2)
                         {
 
                             Debug.Log(Vector3.Angle(vel, -hit.normal));
@@ -100,6 +108,8 @@ public class Projectile : MonoBehaviour
         // shot ended because it's out of range
         Destroy(gameObject); // bullet suicides
     }
+
+    
 
 
     void OnDestroy()

@@ -35,7 +35,8 @@ public class Pure_FPP_Camera : MonoBehaviour {
 		 FovOriginal = GetComponent<Camera>().fieldOfView;
 	 }
 
-	 public void Recoil(){
+	 public void Recoil()
+	 {
 
 	 }
 	 
