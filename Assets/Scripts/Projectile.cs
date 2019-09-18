@@ -80,6 +80,10 @@ public class Projectile : MonoBehaviour
                         // hit the ground: delete bullet (coroutine dies too)
                         Destroy(gameObject);
                         break;
+
+                    case "Enemy":
+                        Destroy(hit.transform.gameObject);
+                        break;                    
                     default:
                         // other objects - bounce off:
                         
