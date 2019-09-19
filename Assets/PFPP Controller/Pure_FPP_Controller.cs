@@ -151,6 +151,7 @@ public class Pure_FPP_Controller : MonoBehaviour {
 	void Update()
 	{
 
+
 		// Cursor.visible = false;
 		if (Controller.isGrounded == true && (SoundSource.clip == JumpSound1 || SoundSource.clip == JumpSound2 || SoundSource.clip == JumpSound3 || SoundSource.clip == JumpSound4 || SoundSource.clip == JumpSound5)) 
 		{
@@ -170,6 +171,18 @@ public class Pure_FPP_Controller : MonoBehaviour {
 		{  
 			JumpsAvailable = MultiJump;
 			tempJumpSpeed = 0;
+		}
+
+		
+		if(Input.GetButtonDown("LeanLeft") || Input.GetButtonDown("LeanRight") )
+		{	
+			MoveSpeed /= 2;
+			RunSpeed /= 2;
+		}
+		if(Input.GetButtonUp("LeanLeft") || Input.GetButtonUp("LeanRight"))
+		{
+			MoveSpeed *= 2;
+			RunSpeed *= 2;
 		}
 
 

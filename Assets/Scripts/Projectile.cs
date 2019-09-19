@@ -83,12 +83,13 @@ public class Projectile : MonoBehaviour
 
                     case "Enemy":
                         Destroy(hit.transform.gameObject);
+                        Destroy(gameObject);
                         break;                    
                     default:
                         // other objects - bounce off:
                         
                         Debug.Log(rand);
-                        if (!hasBeenHit && Vector3.Angle(vel, -hit.normal) > MaxRicochetAngle && rand > 2)
+                        if (!hasBeenHit && Vector3.Angle(vel, -hit.normal) > MaxRicochetAngle && rand > 1.2f)
                         {
 
                             Debug.Log(Vector3.Angle(vel, -hit.normal));

@@ -10,11 +10,20 @@ public class Weapon : MonoBehaviour {
 	public int MagazineSize;
 	public int CurrentAmmo;
 
+	
 	private Vector3 OriginalPos;
+	[Header("ADS")]
 	public Vector3 AimPos;
-
 	public float ADS_speed = 8;
 
+	[Header("Recoil")]
+	public GameObject RecoilHolder;
+	public Vector3 RecoilPos;
+	public Vector3 RecoilRot;
+	public float recoilSpeed = 16; //this could be tied to the loaded bullet. i.e. training rounds could have less recoil etc...
+
+	
+	[Space]
 	public GameObject Player;
 
 	public AudioClip[] ReloadSounds;
@@ -40,11 +49,14 @@ public class Weapon : MonoBehaviour {
 	public void Shoot(){
 		GameObject bullet;
 		bullet = Instantiate(Calibre.Projectile, barrelPos.position, barrelPos.rotation);
+
+		
 		//bullet.GetComponent<Rigidbody>().AddForce(transform.forward * Calibre.Velocity * 100, ForceMode.Acceleration);
         bullet.GetComponent<Projectile>().Bullet = Calibre;
 		
+		
 
-	}
+	}	
 
 	// Use this for initialization
 	void Start () {
@@ -58,6 +70,12 @@ public class Weapon : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if(Input.GetKeyDown(KeyCode.F))
+		{
+			StartCoroutine(Recoil());
+		}
+		// GetComponent<Animator>().SetBool("Shoot", false);
 		if(Input.GetMouseButtonDown(0))
 		{
 			// anim.CrossFadeInFixedTime("Hands|M4A1_Fire",0.01f);
@@ -90,12 +108,19 @@ public class Weapon : MonoBehaviour {
 	// 	 yield return new WaitForSeconds(0.5f);
 	//  }
 
-	 private IEnumerator Reloading(){
+	private IEnumerator Recoil()
+	{
+		RecoilHolder.transform.localPosition = RecoilPos;
+		yield return new WaitForSeconds(1f);
+		RecoilHolder.transform.localPosition = new Vector3(0,0,0);
+	}
+
+	private IEnumerator Reloading(){
 		 yield return new WaitForSeconds(0.5f);
 		// Hands.GetComponent<AudioSource>().PlayOneShot(ReloadSounds[0],0.5f);
 		 yield return new WaitForSeconds(1.72f);
 		// Hands.GetComponent<AudioSource>().PlayOneShot(ReloadSounds[1],0.5f);
-	 }
+	}
 
 
 
